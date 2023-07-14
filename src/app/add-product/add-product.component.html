@@ -1,0 +1,35 @@
+<div class="container">
+
+    <div class="form-container">
+        <h3>Add Product</h3>
+        <div class="form-group">
+            <label>Title</label><br />
+            <input type="text" class="form-control" [(ngModel)]="user.title">
+        </div><br />
+        <div class="form-group">
+            <label>Price</label><br />
+            <input type="text" class="form-control" [(ngModel)]="user.price">
+        </div><br />
+
+        <div class="form-group">
+            <label>Description</label><br />
+            <input type="text" class="form-control" [(ngModel)]="user.description">
+        </div><br />
+
+        <div class="form-group">
+            <label>category</label><br />
+            <input type="text" class="form-control" [(ngModel)]="user.category">
+        </div><br />
+
+        <div class="form-group">
+            <label>Image</label><br />
+            <input type="text" class="form-control" [(ngModel)]="user.image">
+        </div><br />
+
+
+        <button type="submit" class="button-ts" (click)="submit()">Submit</button>
+
+
+    </div>
+
+</div>

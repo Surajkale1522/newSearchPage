@@ -1,0 +1,78 @@
+<div class="container"> 
+    <div>
+        <button type="button" style="float: right;" class="btn custom-primary-color" title="Add Product" (click)="insertProduct()">Add Product</button>
+    </div>
+ <div>
+    <input type="text" class="ts" [(ngModel)]="searchText" (keyup)="filterProducts()" placeholder="Search products">
+    <select [(ngModel)]="selectedCategory" (change)="filterProducts()">
+        <option value="">All Categories</option>
+        <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+      </select>
+      <button type="button" (click)="resetFilter()">Reset</button>
+ </div><br>
+ 
+ <table class="table bordered-table" >
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Image</th>
+            <th>Rating</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let list of filteredProduct.slice((currentPage - 1) * pageSize, currentPage * pageSize)">
+            <td>{{list.id}}</td>
+            <td>{{list.title}}</td>
+            <td>{{list.price}}</td>
+            <td>{{list.description}}</td>
+            <td>{{list.description}}</td>
+            <td>{{list.image}}</td>
+            <td>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Rate</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{list.rating.rate}}</td>
+                            <td>{{list.rating.count}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            
+                <td>
+                    <ng-container *ngIf="editingProductId !== list.id; else editMode">
+                      <button type="button" class="custom" title="Update" (click)="editProduct(list.id)">Update</button><br/><br/>
+                      <button type="button" class="custom-red" title="Delete" (click)="delete($event, list.id || 0)">Delete</button>
+                    </ng-container>
+                    <ng-template #editMode>
+                      <button type="button" class="custom-primary-color" title="save" (click)="saveProduct(list)">Save</button><br/>
+                      <button type="button" class="custom-danger-color" title="cancle" (click)="cancelEdit()">Cancel</button>
+                    </ng-template>
+                  </td>
+            
+            
+        </tr>
+    </tbody>
+
+ 
+
+ </table>
+<div class="pagination">
+    <button type="button" class="next"[disabled]="currentPage === filteredProduct.length / pageSize"  (click)="goToPage(currentPage+1)">Next Page</button><br/>
+  </div><br/>
+  <div><button type="button" class="ps" [disabled]="currentPage === 1"  (click)="goToPreviousPage(currentPage-1)">Pervious Page</button></div>
+</div>
+
+     
+
+
